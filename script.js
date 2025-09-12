@@ -1,5 +1,11 @@
-const correctAnswer = "gaus";
-const correctNumber = "119"; // the string to check
+const correctNames = [
+  "gauss",
+  "carl",
+  "friedrich",
+  "carl friedrich gauss"
+];
+
+const correctNumber = "119"; // correct number string
 
 const input = document.getElementById("answer"); // name input
 const rin = document.getElementById("nums");     // number input
@@ -12,29 +18,29 @@ redirectButton.textContent = "Home Page";
 redirectButton.style.display = "none"; // hidden by default
 redirectButton.style.marginTop = "10px";
 redirectButton.addEventListener("click", () => {
-  window.location.href = "https://ohlonecicada.netlify.app/"; // change this to your target page
+  window.location.href = "https://ohlonecicada.netlify.app/"; // target page
 });
 
 // Add the button to the result area
 result.parentNode.appendChild(redirectButton);
 
 function checkAnswer() {
-  if (
-    input.value.trim().toLowerCase() === correctAnswer &&
-    rin.value.trim() === correctNumber
-  ) {
-    // Show success message
+  const nameInput = input.value.trim().toLowerCase();
+
+  // check if name is in accepted list
+  const nameValid = correctNames.includes(nameInput);
+
+  // check if number matches
+  const numberValid = rin.value.trim() === correctNumber;
+
+  if (nameValid && numberValid) {
     result.textContent = "✅ Type \"M3SA\" in your channel";
     result.style.color = "green";
-
-    // Show the redirect button
-    redirectButton.style.display = "inline-block";
+    redirectButton.style.display = "inline-block"; // show button
   } else {
     result.textContent = "❌ Try again.";
     result.style.color = "red";
-
-    // Hide the redirect button if answer is wrong
-    redirectButton.style.display = "none";
+    redirectButton.style.display = "none"; // hide button if wrong
   }
 }
 
